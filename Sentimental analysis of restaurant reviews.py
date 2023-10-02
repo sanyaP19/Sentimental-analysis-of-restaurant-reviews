@@ -105,11 +105,10 @@ X_train.shape,X_test.shape,y_train.shape,y_test.shape
 # In[21]:
 
 
-#Fitting Naive Bayes to Training Set
-from sklearn.naive_bayes import MultinomialNB
-#Used for classification with discrete features (eg, word counts for text classification)
-classifier=MultinomialNB()
+from sklearn.ensemble import RandomForestClassifier
+classifier=RandomForestClassifier(random_state=0)
 classifier.fit(X_train,y_train)
+
 
 
 # In[22]:
@@ -126,7 +125,6 @@ y_pred
 #Accuracy, Precision and Recall
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
-from sklearn.metrics import recall_score
 
 score1=accuracy_score(y_test,y_pred)
 score2=precision_score(y_test,y_pred)
@@ -135,7 +133,6 @@ score3=recall_score(y_test,y_pred)
 print("Scores")
 print("Accuracy Score is {}%".format(round(score1*100,2)))
 print("Precision Score is {}%".format(round(score2*100,2)))
-print("Recall Score is {}%".format(round(score3*100,2)))
 
 
 # In[25]:
@@ -172,7 +169,7 @@ plt.ylabel("Actual Label")
 best_accuracy=0.0
 alpha_val=0.0
 for i in np.arange(0.1,1.1,0.1):
-    temp_classifier=MultinomialNB(alpha=i)
+    temp_classifier=RandomForestClassifier(random_state=0)
     temp_classifier.fit(X_train,y_train)
     temp_y_pred= temp_classifier.predict(X_test)
     score=accuracy_score(y_test,temp_y_pred)
@@ -187,7 +184,7 @@ print("The best accuracy score is {}% for alpha value as {}".format(round(best_a
 # In[37]:
 
 
-classifier=MultinomialNB(alpha=0.2)
+classifier=RandomForestClassifier(random_state=0)
 classifier.fit(X_train,y_train)
 
 
